@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ISysRG Inference Web UI</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+    :root {
+      --purple: #A6174B;
+      --oren-mudo: #F27127;
+      --oren-langsat: #F25D27;
+      --merah-tomat: #F24130;
+      --item: #0D0D0D;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Montserrat", sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      display: inline;
+    }
+
+    footer {
+      padding: 20px;
+      color: #ffff;
+      background-color: var(--oren-mudo);
+    }
+
+    main {
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      background-image: url(../static/images/cpu.gif);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-blend-mode: overlay;
+      background-size: 120%;
+      background-position-x: 20%;
+      background-position-y: 20%;
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    .jumbotron {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      font-size: 1em;
+      padding: 1px;
+      background-color: var(--oren-mudo);
+      text-align: center;
+      color: #ffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .jumbotron>.logo-isysrg {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .jumbotron>* {
+      margin: 0;
+      padding: 0;
+    }
+
+    .jumbotron>.logo-rsmh {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+
+    nav {
+      background-color: var(--oren-langsat);
+      color: #ffff;
+      padding: 0px;
+      position: sticky;
+      top: 0;
+      overflow-x: scroll;
+      z-index: 1;
+    }
+
+    nav * {
+      text-align: center;
+    }
+
+    .inference-box {
+      width: 1080px;
+      height: 720px;
+      display: flex;
+      flex-direction: row;
+      border-style: solid;
+      border-width: 1px;
+      justify-content: space-evenly;
+      align-items: stretch;
+      padding: 1.5em;
+      transform: scale(0.9, 0.9);
+
+      background-color: rgba(255, 255, 255, 0.6);
+      box-shadow: 4px 4px 4px 4px rgba(242, 113, 39, 0.9);
+      border-radius: 20px;
+    }
+
+    .inference-box .first-col {
+      display: flex;
+      flex-direction: column;
+      /* border-style: solid;
+      border-width: 1px; */
+      border-color: var(--oren-langsat);
+      justify-content: center;
+      padding: 1.5em;
+
+      background-image: linear-gradient(to left, var(--oren-mudo), var(--oren-langsat), var(--merah-tomat));
+      /* box-shadow: 4px 4px 4px 4px var(--oren-mudo); */
+      border-radius: 20px;
+    }
+
+    .inference-box .first-col>* {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      /* border-style: solid;
+      border-width: 1px; */
+      flex-grow: 1;
+    }
+
+    .inference-box .first-col .input {
+      height: 200%;
+      padding: 1.5em;
+      border-style: solid;
+      border-width: 0.5px;
+      border-radius: 20px;
+      background-color: rgba(0, 255, 255, 0.2);
+      box-shadow: 1px 1px 1px 1px var(--oren-mudo);
+    }
+
+    .inference-box .first-col .input:hover {
+      background-color: rgba(0, 255, 255, 0.5);
+    }
+
+    .inference-box .first-col .input .file {
+      display: flex;
+      flex-direction: column;
+      padding: 1.5em;
+      overflow: auto;
+    }
+
+    .inference-box .first-col .input>* {
+      align-self: center;
+      /* border-style: solid;
+      border-width: 1px; */
+    }
+
+    .inference-box .first-col .input .button {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    .inference-box .first-col .input .button:hover {
+      background-color: #0056b3;
+    }
+
+    input[type=file]::file-selector-button {
+      margin-right: 20px;
+      border: none;
+      background: #007bff;
+      padding: 10px 20px;
+      border-radius: 10px;
+      color: #fff;
+      cursor: pointer;
+      transition: background .2s ease-in-out;
+    }
+
+    input[type=file]::file-selector-button:hover {
+      background: #0056b3;
+    }
+
+    .inference-box .first-col .progress {
+      display: flex;
+      flex-direction: column-reverse;
+      /* border-style: solid;
+      border-width: 1px; */
+      padding: 1.5em;
+    }
+
+    .inference-box .first-col .progress .bar {
+      /* border-style: solid;
+      border-width: 1px; */
+      display: flex;
+      /* display: none; */
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .inference-box .first-col .progress .bar label {
+      align-self: center;
+      text-align: center;
+      line-height: 30px;
+      font-weight: bold;
+      /* border-style: solid;
+      border-width: 1px; */
+    }
+
+    .inference-box .first-col .progress .bar progress {
+      align-self: stretch;
+      border-style: solid;
+      border-width: 1px;
+      border-radius: 100px;
+      background-color: rgba(0, 255, 255, 0.2);
+      color: rgba(0, 255, 255, 0.3);
+      transition: width 0.3s ease-in-out;
+    }
+
+    .inference-box .first-col .progress .log {
+      display: flex;
+      flex-direction: column;
+      /* border-style: solid;
+      border-width: 1px; */
+      padding: 1em;
+      height: 15em;
+    }
+
+    .inference-box .first-col .progress .log h5 {
+      text-align: center;
+      margin: 0;
+    }
+
+    .inference-box .first-col .progress .log .text {
+      display: flex;
+      flex-direction: column-reverse;
+      border-style: solid;
+      border-width: 1px;
+      height: 10em;
+      overflow: auto;
+      transition: all 0.2s ease-in-out;
+      background-color: rgba(0, 255, 255, 0.2);
+    }
+
+    .inference-box .first-col .progress .log .text:hover {
+      height: 20em;
+      transition: all 0.2s ease-in-out;
+      background-color: rgba(0, 255, 255, 0.5);
+    }
+
+    .inference-box .first-col .progress .log .text:not(hover) {
+      height: 2.4em;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .inference-box .first-col .progress .log .button {
+      margin-block: 5px;
+      display: flex;
+      flex-direction: row;
+      justify-content: right;
+    }
+
+    .inference-box .first-col .progress .log .button *:hover {
+      opacity: 1;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .inference-box .first-col .progress .log .button *:not(hover) {
+      opacity: 0.5;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .inference-box .second-col {
+      margin: 0;
+      padding: 0;
+
+      display: flex;
+      flex-direction: column;
+      border-style: solid;
+      border-width: 1px;
+      border-color: var(--oren-langsat);
+      justify-content: space-evenly;
+      opacity: 0;
+      visibility: hidden;
+      background-image: linear-gradient(to right, var(--oren-mudo), var(--oren-langsat), var(--merah-tomat));
+      border-radius: 20px;
+    }
+
+    .inference-box .second-col.active {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 2s ease, visibility 0s linear 0.1s;
+    }
+
+    /* .inference-box .second-col:hover {
+      background-color: rgba(0, 255, 255, 0.5);
+    } */
+
+    /* video {
+      border-style: solid;
+      border-width: 1px;
+    } */
+
+    .inference-box .second-col *>video:hover {
+      transform: scale(1.25, 1.25);
+      transition: all 0.2s ease-in-out;
+    }
+
+    .inference-box .second-col *>video:not(hover) {
+      transform: scale(1, 1);
+      transition: all 0.2s ease-in-out;
+    }
+
+    figcaption {
+      text-align: center;
+      font-weight: bolder;
+    }
+
+    @media screen and (max-width: 1200px) {
+      main {
+        flex-flow: column nowrap;
+      }
+
+      main aside {
+        align-self: center;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      nav ul {
+        justify-content: center;
+      }
+
+      main aside {
+        align-self: stretch;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="jumbotron">
+      <div class="logo-isysrg">
+        <img src="../static/images/isysrg_logo.png" width=200px;">
+      </div>
+      <div class="judul">
+        <h1>ISysRG Inference Web UI</h1>
+        <p>"WE LEARN, WE COLLABORATE, WE DISCOVER!"</p>
+      </div>
+      <div class="logo-rsmh">
+        <img src="../static/images/rsmh-logo.png" width="200px;">
+      </div>
+    </div>
+    <nav>
+      <p>"The portal to the realm of Artificial Intelligence."</p>
+    </nav>
+  </header>
+  <main>
+    <div class="inference-box">
+      <div class="first-col">
+        <div class="input">
+          <div class="file">
+            <label for="inference-input-file">Please select an image/video to infer: </label>
+            <input type="file" id="inference-input-file" accept="image/*,video/*"
+              style="max-width: 20em; overflow-x: scroll;" size="60">
+          </div>
+          <div class="input-option">
+            <h5 style="margin: 0;">Input Options:</h5>
+            <label for="inference-input-checkbox">Is dopler?</label>
+            <input type="checkbox" id="inference-input-checkbox">
+          </div>
+          <div class="button">
+            <input type="button" id="inference-input-button" value="INFER" style="all: unset;">
+          </div>
+        </div>
+        <div class="progress">
+          <div class="log">
+            <h5>Server Log:</h5>
+            <div class="text">
+              <samp id="inference-progress-log">
+                log first line<br>
+                log second line<br>
+                log third line<br>
+                log fourth line<br>
+                log fifth line<br>
+                log sixth line<br>
+                log seventh line<br>
+                log eigth line<br>
+                log nineth line<br>
+                log tenth line<br>
+                log eleventh line<br>
+              </samp>
+            </div>
+            <div class="button">
+              <i class="fas fa-trash"></i>
+              <i class="fas fa-anchor"></i>
+            </div>
+          </div>
+          <div class="bar">
+            <label for="inference-progress-bar">Progress:</label>
+            <progress id="inference-progress-bar" value="32" max="100"> 32% </progress>
+          </div>
+        </div>
+      </div>
+      <div class="second-col">
+        <div class="output">
+          <div class="preview">
+            <figure>
+              <video src="../static/preview_video/10955284079_preview_video.mp4" width="320" height="240" controls
+                autoplay loop type="video/mp4"></video>
+              <figcaption>Preview Video</figcaption>
+            </figure>
+          </div>
+          <div class="inference">
+            <figure>
+              <video src="../static/processed_video/10955284079_processed_video.mp4" width="320" height="240" controls
+                autoplay loop type="video/mp4"></video>
+              <figcaption>Inferred Video</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <p>ISysRG Inference Web UI &#169; 2023, Intelligent System Research Group Universitas Sriwijaya</p>
+  </footer>
+</body>
+<script>
+  const inferButton = document.getElementById("inference-input-button");
+  var i = 0;
+
+  // Add a click event listener to the button
+  inferButton.addEventListener("click", () => {
+    i++;
+    document.getElementById("inference-progress-log").appendChild(document.createElement("br"));
+    document.getElementById("inference-progress-log").appendChild(document.createTextNode(`foo ${i}`));
+  });
+
+  inferButton.addEventListener("click", () => {
+    document.querySelector('.second-col').classList.toggle('active');
+  });
+
+</script>
+
+</html>

@@ -1,0 +1,336 @@
+:root {
+    --purple: #A6174B;
+    --oren-mudo: #F27127;
+    --oren-langsat: #F25D27;
+    --merah-tomat: #F24130;
+    --item: #0D0D0D;
+  }
+  
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: "Montserrat", sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header {
+    display: inline;
+  }
+  
+  footer {
+    padding: 20px;
+    color: #ffff;
+    background-color: #2b7a78;
+  }
+  
+  main {
+    margin: 0;
+  }
+  
+  .jumbotron {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    font-size: 1em;
+    padding: 1px;
+    background-color: #2b7a78;
+    text-align: center;
+    /* color: #ffff; */
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .jumbotron > * {
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+  }
+  
+  .jumbotron img {
+    max-width: 150px; /* Adjust this value as needed */
+  }
+  
+  .jumbotron > .logo-isysrg,
+  .jumbotron > .logo-rsmh {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+
+
+
+  
+  
+  
+  /* nav {
+    background-color: var(--oren-langsat);
+    color: #ffff;
+    padding: 0px;
+    position: sticky;
+    top: 0;
+    overflow-x: scroll;
+    z-index: 1;
+  }
+  
+  nav * {
+    text-align: center;
+  } */
+  
+  .inference-box {
+    /* width: 1080px;
+    height: 720px; */
+    /* display: flex; */
+    flex-direction: row;
+    /* border-style: solid;
+    border-width: 1px;
+    justify-content: space-evenly;
+    align-items: stretch;
+    padding: 1.5em; */
+
+    /* transform: scale(0.9, 0.9); */
+  
+    /* background-color: rgba(255, 255, 255, 0.6); */
+    /* box-shadow: 4px 4px 4px 4px rgba(242, 113, 39, 0.9); */
+    /* border-radius: 20px; */
+  }
+  
+  .inference-box .first-col {
+    /* display: flex; */
+    flex-direction: column;
+    /* border-color: var(--oren-langsat); */
+    justify-content: center;
+    padding: 1.5em;
+    background-color: #3aafa9;
+    /* box-shadow: 4px 4px 4px 4px var(--oren-mudo); */
+    /* border-radius: 20px; */
+  }
+  
+  .inference-box .first-col>* {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* border-style: solid;
+    border-width: 1px; */
+    flex-grow: 1;
+  }
+  
+  .inference-box .first-col .input {
+    /* height: 200%;
+    padding: 1.5em;
+    border-style: solid;
+    border-width: 0.5px; */
+    border-radius: 20px;
+    background-color: #def2f1;
+    /* box-shadow: 1px 1px 1px 1px var(--oren-mudo); */
+    padding: 15px;
+  }
+  
+  /* .inference-box .first-col .input:hover {
+    background-color: rgba(0, 255, 255, 0.5);
+  } */
+  
+  .inference-box .first-col .input .file {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5em;
+    overflow: auto;
+  }
+  
+  .inference-box .first-col .input>* {
+    align-self: center;
+    /* border-style: solid;
+    border-width: 1px; */
+  }
+  
+  .inference-box .first-col .input .button {
+    background-color: #0b5671;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+
+  .tombol{
+    background-color: #a6c1c0;
+    padding: 10px;
+    border-radius: 20px;
+  }
+
+  .tulisan{
+    padding-bottom: 10px;
+  }
+  
+  .inference-box .first-col .input .button:hover {
+    background-color: #497281;
+  }
+
+  .input-option{
+    padding-bottom: 10px;
+  }
+  
+  input[type=file]::file-selector-button {
+    margin-right: 20px;
+    border: none;
+    background: #2b7a78;
+    padding: 10px 20px;
+    border-radius: 20px;
+    color: #fff;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
+  }
+  
+  input[type=file]::file-selector-button:hover {
+    background: #469a97;
+  }
+  
+  .inference-box .first-col .progress {
+    display: flex;
+    flex-direction: column-reverse;
+    /* border-style: solid;
+    border-width: 1px; */
+    padding: 1.5em;
+  }
+  
+  .inference-box .first-col .progress .bar {
+    /* border-style: solid;
+    border-width: 1px; */
+    display: flex;
+    /* display: none; */
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .inference-box .first-col .progress .bar label {
+    align-self: center;
+    text-align: center;
+    line-height: 30px;
+    font-weight: bold;
+    /* border-style: solid;
+    border-width: 1px; */
+  }
+  
+  .inference-box .first-col .progress .bar progress {
+    align-self: center;
+    border-style: solid;
+    border-width: 1px;
+    /* border-radius: 100px; */
+    background-color: rgba(0, 255, 255, 0.2);
+    color: rgba(0, 255, 255, 0.3);
+    transition: width 0.3s ease-in-out;
+  }
+  
+  .inference-box .first-col .progress .log {
+    display: flex;
+    flex-direction: column;
+    /* border-style: solid;
+    border-width: 1px; */
+    padding: 1em;
+    height: 15em;
+  }
+  
+  .inference-box .first-col .progress .log h5 {
+    text-align: center;
+    margin: 0;
+  }
+  
+  .inference-box .first-col .progress .log .text {
+    display: flex;
+    flex-direction: column-reverse;
+    border-style: solid;
+    border-width: 1px;
+    /* height: 10em; */
+    overflow: auto;
+    /* transition: all 0.2s ease-in-out; */
+    background-color: rgba(0, 255, 255, 0.2);
+  }
+  
+  .inference-box .first-col .progress .log .text:hover {
+    height: 20em;
+    transition: all 0.2s ease-in-out;
+    background-color: rgba(0, 255, 255, 0.5);
+  }
+
+  .inference-box .first-col .progress .log .text:not(hover) {
+    height: 2.4em;
+    transition: all 0.2s ease-in-out;
+  }
+
+  video{
+    width: 500px; 
+    height:500px;
+  }
+
+  .inference-box .second-col {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #e2f4f4;
+  }
+  
+  .inference-box .second-col .output {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .inference-box .second-col .output .preview,
+  .inference-box .second-col .output .inference {
+    width: 100%; 
+  }
+  
+  .inference-box .second-col .output .preview figure,
+  .inference-box .second-col .output .inference figure {
+    margin: 0;  
+    /* tutup margin kalo pen kotak vid ga nemplok */
+  }
+  
+  .inference-box .second-col .output .preview video,
+  .inference-box .second-col .output .inference video {
+    width: 100%;
+  }
+  
+  .inference-box .second-col .output .preview figcaption,
+  .inference-box .second-col .output .inference figcaption {
+    text-align: center;
+    font-weight: bolder;
+    padding: 10px;
+  }
+
+  .jumbotron img {
+    width: 200px;
+}
+
+  .inference-box .second-col .output .preview,
+  .inference-box .second-col .output .inference {
+    width: 100%;
+  }
+
+  @media screen and (max-width: 600px) {
+    .jumbotron img {
+      width: 90px; /* Reduce the width of all images to 90px */
+  }
+
+  .jumbotron {
+      margin: 0 auto; /* Center the container horizontally */
+  }
+
+  /* ini agar video pas 600px jadi atas bawah bukan sebelahan */
+  .inference-box .second-col .output {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  
+}
